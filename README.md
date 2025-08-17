@@ -1,15 +1,19 @@
-# capstone-database setup
+# Setting up the mysql docker container
 
-First, pull the official latest mysql image from docker hub
+Create an image from the Dockerfile
 ```
-docker pull mysql:latest
+docker build -t mysql-image:1.0 .
 ```
 
 Then create a contianer from that image
 ```
-docker run --name mysql-container -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123 -v mysql-data:/var/lib/mysql/data mysql:latest
+docker run --name mysql-container -p 3333:3306 -v mysql-data:/var/lib/mysql/data mysql:latest mysql-image:1.0
 ```
-syntax: 
+
+# mysqldump
+When the database tables/data have been changed, do this to make a .sql file with the updated database. <br><br>
+(you need to be in the directory of where you want to put the .sql file)
 ```
-docker run --name [set container name] -p [set the port where it will be served]:[the original port in the docker container] -e MYSQL_ROOT_PASSWORD=[set password] -v [set volume name]:[path where to put it in the docker container] mysql:latest
+mysqldump -u root -p -d capstone > capstoneDatabase.sql
 ```
+
