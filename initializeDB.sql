@@ -16,6 +16,14 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Current Database: `capstone`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `capstone` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+
+USE `capstone`;
+
+--
 -- Table structure for table `Authors`
 --
 
@@ -28,6 +36,16 @@ CREATE TABLE `Authors` (
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Authors`
+--
+
+LOCK TABLES `Authors` WRITE;
+/*!40000 ALTER TABLE `Authors` DISABLE KEYS */;
+INSERT INTO `Authors` VALUES (1,'Dr. Maria Santos'),(2,'Prof. Juan Dela Cruz'),(3,'Dr. Angela Reyes'),(4,'Prof. Roberto Garcia');
+/*!40000 ALTER TABLE `Authors` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `PaperReferences`
@@ -48,6 +66,15 @@ CREATE TABLE `PaperReferences` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `PaperReferences`
+--
+
+LOCK TABLES `PaperReferences` WRITE;
+/*!40000 ALTER TABLE `PaperReferences` DISABLE KEYS */;
+/*!40000 ALTER TABLE `PaperReferences` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `ResearchPaperAuthors`
 --
 
@@ -65,6 +92,16 @@ CREATE TABLE `ResearchPaperAuthors` (
   CONSTRAINT `ResearchPaperAuthors_ibfk_2` FOREIGN KEY (`AuthorId`) REFERENCES `Authors` (`Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ResearchPaperAuthors`
+--
+
+LOCK TABLES `ResearchPaperAuthors` WRITE;
+/*!40000 ALTER TABLE `ResearchPaperAuthors` DISABLE KEYS */;
+INSERT INTO `ResearchPaperAuthors` VALUES (1,1,1),(2,1,2),(3,2,2),(4,2,3),(5,2,4);
+/*!40000 ALTER TABLE `ResearchPaperAuthors` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `ResearchPapers`
@@ -87,6 +124,16 @@ CREATE TABLE `ResearchPapers` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `ResearchPapers`
+--
+
+LOCK TABLES `ResearchPapers` WRITE;
+/*!40000 ALTER TABLE `ResearchPapers` DISABLE KEYS */;
+INSERT INTO `ResearchPapers` VALUES (1,'Research on Philippine Education',2023,'Philippines, education, policy, learning outcomes','This study explores the current state of education in the Philippines, focusing on access, quality, and policy reforms over the past decade.','A mixed-methods approach was employed, combining statistical analysis of government education data with semi-structured interviews of educators.','Results indicate a persistent gap between rural and urban education quality, with policy reforms showing gradual but uneven improvements.',1),(2,'Research on Philippine Education',2024,'Philippines, curriculum reform, teacher training, student performance','This paper examines the effects of recent curriculum reforms in the Philippines, particularly the K-12 program, on student performance and teacher preparedness.','Quantitative analysis of national exam results was paired with surveys from over 500 teachers across various regions.','Findings show significant improvement in competency-based learning, though challenges remain in resource allocation and teacher training.',1);
+/*!40000 ALTER TABLE `ResearchPapers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Users`
 --
 
@@ -100,6 +147,16 @@ CREATE TABLE `Users` (
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Users`
+--
+
+LOCK TABLES `Users` WRITE;
+/*!40000 ALTER TABLE `Users` DISABLE KEYS */;
+INSERT INTO `Users` VALUES (1,'leafboo','sampleEmail@gmail.com');
+/*!40000 ALTER TABLE `Users` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `WorkspaceResearchPapers`
@@ -121,6 +178,16 @@ CREATE TABLE `WorkspaceResearchPapers` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `WorkspaceResearchPapers`
+--
+
+LOCK TABLES `WorkspaceResearchPapers` WRITE;
+/*!40000 ALTER TABLE `WorkspaceResearchPapers` DISABLE KEYS */;
+INSERT INTO `WorkspaceResearchPapers` VALUES (1,1,1),(2,1,2);
+/*!40000 ALTER TABLE `WorkspaceResearchPapers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Workspaces`
 --
 
@@ -138,6 +205,16 @@ CREATE TABLE `Workspaces` (
   CONSTRAINT `Workspaces_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `Users` (`Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Workspaces`
+--
+
+LOCK TABLES `Workspaces` WRITE;
+/*!40000 ALTER TABLE `Workspaces` DISABLE KEYS */;
+INSERT INTO `Workspaces` VALUES (1,'Research on Philippine Education','2025-08-14',2,1);
+/*!40000 ALTER TABLE `Workspaces` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -148,4 +225,4 @@ CREATE TABLE `Workspaces` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-18 10:10:10
+-- Dump completed on 2025-08-18 10:16:02
