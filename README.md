@@ -19,6 +19,6 @@ docker exec -it [container name/id] /bin/bash
 When the database tables/data have been changed, do this to make a .sql file with the updated database. <br><br>
 (you need to be in the directory of where you want to put the .sql file)
 ```
-mysqldump -u root -p -d capstone > capstoneDatabase.sql
+mysqldump -u root -p --databases capstone > capstoneDatabase.sql
 ```
 
