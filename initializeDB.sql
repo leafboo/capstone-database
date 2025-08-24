@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.43, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 9.4.0, for Linux (x86_64)
 --
 -- Host: localhost    Database: capstone
 -- ------------------------------------------------------
--- Server version	8.0.43-0ubuntu0.22.04.1
+-- Server version	9.4.0
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -34,7 +34,7 @@ CREATE TABLE `Authors` (
   `Id` int NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `Authors` (
 
 LOCK TABLES `Authors` WRITE;
 /*!40000 ALTER TABLE `Authors` DISABLE KEYS */;
-INSERT INTO `Authors` VALUES (1,'Dr. Maria Santos'),(2,'Prof. Juan Dela Cruz'),(3,'Dr. Angela Reyes'),(4,'Prof. Roberto Garcia');
+INSERT INTO `Authors` VALUES (1,'Dr. Maria Santos'),(2,'Prof. Juan Dela Cruz'),(3,'Dr. Angela Reyes'),(4,'Prof. Roberto Garcia'),(5,'Alice Johnson'),(6,'Bob Martinez');
 /*!40000 ALTER TABLE `Authors` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,7 +90,7 @@ CREATE TABLE `ResearchPaperAuthors` (
   KEY `AuthorId` (`AuthorId`),
   CONSTRAINT `ResearchPaperAuthors_ibfk_1` FOREIGN KEY (`PaperId`) REFERENCES `ResearchPapers` (`Id`),
   CONSTRAINT `ResearchPaperAuthors_ibfk_2` FOREIGN KEY (`AuthorId`) REFERENCES `Authors` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,7 +99,7 @@ CREATE TABLE `ResearchPaperAuthors` (
 
 LOCK TABLES `ResearchPaperAuthors` WRITE;
 /*!40000 ALTER TABLE `ResearchPaperAuthors` DISABLE KEYS */;
-INSERT INTO `ResearchPaperAuthors` VALUES (1,1,1),(2,1,2),(3,2,2),(4,2,3),(5,2,4);
+INSERT INTO `ResearchPaperAuthors` VALUES (1,1,1),(2,1,2),(3,2,2),(4,2,3),(5,2,4),(6,3,5),(7,3,6);
 /*!40000 ALTER TABLE `ResearchPaperAuthors` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,7 +120,7 @@ CREATE TABLE `ResearchPapers` (
   `Results` text,
   `WorkspacesIn` int NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,7 +129,7 @@ CREATE TABLE `ResearchPapers` (
 
 LOCK TABLES `ResearchPapers` WRITE;
 /*!40000 ALTER TABLE `ResearchPapers` DISABLE KEYS */;
-INSERT INTO `ResearchPapers` VALUES (1,'Research on Philippine Education',2023,'Philippines, education, policy, learning outcomes','This study explores the current state of education in the Philippines, focusing on access, quality, and policy reforms over the past decade.','A mixed-methods approach was employed, combining statistical analysis of government education data with semi-structured interviews of educators.','Results indicate a persistent gap between rural and urban education quality, with policy reforms showing gradual but uneven improvements.',1),(2,'Research on Philippine Education',2024,'Philippines, curriculum reform, teacher training, student performance','This paper examines the effects of recent curriculum reforms in the Philippines, particularly the K-12 program, on student performance and teacher preparedness.','Quantitative analysis of national exam results was paired with surveys from over 500 teachers across various regions.','Findings show significant improvement in competency-based learning, though challenges remain in resource allocation and teacher training.',1);
+INSERT INTO `ResearchPapers` VALUES (1,'Research on Philippine Education',2023,'Philippines, education, policy, learning outcomes','This study explores the current state of education in the Philippines, focusing on access, quality, and policy reforms over the past decade.','A mixed-methods approach was employed, combining statistical analysis of government education data with semi-structured interviews of educators.','Results indicate a persistent gap between rural and urban education quality, with policy reforms showing gradual but uneven improvements.',1),(2,'Research on Philippine Education',2024,'Philippines, curriculum reform, teacher training, student performance','This paper examines the effects of recent curriculum reforms in the Philippines, particularly the K-12 program, on student performance and teacher preparedness.','Quantitative analysis of national exam results was paired with surveys from over 500 teachers across various regions.','Findings show significant improvement in competency-based learning, though challenges remain in resource allocation and teacher training.',1),(3,'Optimizing SQL Databases for High Performance',2023,'SQL, Databases, Optimization, Performance','This paper discusses optimization strategies for SQL databases to improve query performance and scalability.','A case study approach was used with benchmarking queries on MySQL and PostgreSQL using indexing, partitioning, and caching techniques.','The results showed significant performance gains when combining indexing with caching mechanisms, reducing query time by up to 60%.',1);
 /*!40000 ALTER TABLE `ResearchPapers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,7 +145,7 @@ CREATE TABLE `Users` (
   `UserName` varchar(255) NOT NULL,
   `Email` varchar(255) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,7 +154,7 @@ CREATE TABLE `Users` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES (1,'leafboo','sampleEmail@gmail.com');
+INSERT INTO `Users` VALUES (1,'leafboo','sampleEmail@gmail.com'),(2,'testUser','testEmailll@gmail.com');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -174,7 +174,7 @@ CREATE TABLE `WorkspaceResearchPapers` (
   KEY `PaperId` (`PaperId`),
   CONSTRAINT `WorkspaceResearchPapers_ibfk_1` FOREIGN KEY (`WorkspaceId`) REFERENCES `Workspaces` (`Id`),
   CONSTRAINT `WorkspaceResearchPapers_ibfk_2` FOREIGN KEY (`PaperId`) REFERENCES `ResearchPapers` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -183,7 +183,7 @@ CREATE TABLE `WorkspaceResearchPapers` (
 
 LOCK TABLES `WorkspaceResearchPapers` WRITE;
 /*!40000 ALTER TABLE `WorkspaceResearchPapers` DISABLE KEYS */;
-INSERT INTO `WorkspaceResearchPapers` VALUES (1,1,1),(2,1,2);
+INSERT INTO `WorkspaceResearchPapers` VALUES (1,1,1),(2,1,2),(3,2,3);
 /*!40000 ALTER TABLE `WorkspaceResearchPapers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -199,11 +199,11 @@ CREATE TABLE `Workspaces` (
   `Name` varchar(255) NOT NULL,
   `DateCreated` date NOT NULL,
   `NumberOfPapers` int DEFAULT NULL,
-  `UserID` int NOT NULL,
+  `UserId` int NOT NULL,
   PRIMARY KEY (`Id`),
-  KEY `UserID` (`UserID`),
-  CONSTRAINT `Workspaces_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `Users` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `UserID` (`UserId`),
+  CONSTRAINT `Workspaces_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `Users` (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -212,7 +212,7 @@ CREATE TABLE `Workspaces` (
 
 LOCK TABLES `Workspaces` WRITE;
 /*!40000 ALTER TABLE `Workspaces` DISABLE KEYS */;
-INSERT INTO `Workspaces` VALUES (1,'Research on Philippine Education','2025-08-14',2,1);
+INSERT INTO `Workspaces` VALUES (1,'Research on Philippine Education','2025-08-14',2,1),(2,'SQL Databases','2025-08-20',1,2);
 /*!40000 ALTER TABLE `Workspaces` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -225,4 +225,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-18 10:16:02
+-- Dump completed on 2025-08-24  8:45:24
