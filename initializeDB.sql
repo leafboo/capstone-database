@@ -24,86 +24,6 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/ `capstone` /*!40100 DEFAULT CHARACTER S
 USE `capstone`;
 
 --
--- Table structure for table `Authors`
---
-
-DROP TABLE IF EXISTS `Authors`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Authors` (
-  `Id` int NOT NULL AUTO_INCREMENT,
-  `Name` varchar(255) NOT NULL,
-  PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Authors`
---
-
-LOCK TABLES `Authors` WRITE;
-/*!40000 ALTER TABLE `Authors` DISABLE KEYS */;
-INSERT INTO `Authors` VALUES (1,'Dr. Maria Santos'),(2,'Prof. Juan Dela Cruz'),(3,'Dr. Angela Reyes'),(4,'Prof. Roberto Garcia'),(5,'Alice Johnson'),(6,'Bob Martinez');
-/*!40000 ALTER TABLE `Authors` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `PaperReferences`
---
-
-DROP TABLE IF EXISTS `PaperReferences`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `PaperReferences` (
-  `Id` int NOT NULL AUTO_INCREMENT,
-  `APA` text NOT NULL,
-  `IEEE` text NOT NULL,
-  `WorkspaceId` int DEFAULT NULL,
-  PRIMARY KEY (`Id`),
-  KEY `WorkspaceId` (`WorkspaceId`),
-  CONSTRAINT `PaperReferences_ibfk_1` FOREIGN KEY (`WorkspaceId`) REFERENCES `Workspaces` (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `PaperReferences`
---
-
-LOCK TABLES `PaperReferences` WRITE;
-/*!40000 ALTER TABLE `PaperReferences` DISABLE KEYS */;
-/*!40000 ALTER TABLE `PaperReferences` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `ResearchPaperAuthors`
---
-
-DROP TABLE IF EXISTS `ResearchPaperAuthors`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ResearchPaperAuthors` (
-  `Id` int NOT NULL AUTO_INCREMENT,
-  `PaperId` int DEFAULT NULL,
-  `AuthorId` int DEFAULT NULL,
-  PRIMARY KEY (`Id`),
-  KEY `PaperId` (`PaperId`),
-  KEY `AuthorId` (`AuthorId`),
-  CONSTRAINT `ResearchPaperAuthors_ibfk_1` FOREIGN KEY (`PaperId`) REFERENCES `ResearchPapers` (`Id`),
-  CONSTRAINT `ResearchPaperAuthors_ibfk_2` FOREIGN KEY (`AuthorId`) REFERENCES `Authors` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `ResearchPaperAuthors`
---
-
-LOCK TABLES `ResearchPaperAuthors` WRITE;
-/*!40000 ALTER TABLE `ResearchPaperAuthors` DISABLE KEYS */;
-INSERT INTO `ResearchPaperAuthors` VALUES (1,1,1),(2,1,2),(3,2,2),(4,2,3),(5,2,4),(6,3,5),(7,3,6);
-/*!40000 ALTER TABLE `ResearchPaperAuthors` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `ResearchPapers`
 --
 
@@ -113,14 +33,19 @@ DROP TABLE IF EXISTS `ResearchPapers`;
 CREATE TABLE `ResearchPapers` (
   `Id` int NOT NULL AUTO_INCREMENT,
   `Title` varchar(255) NOT NULL,
-  `YearOfPublication` year NOT NULL,
+  `PublicationYear` year NOT NULL,
   `Keywords` text,
   `Abstract` text,
   `Methods` text,
-  `Results` text,
-  `WorkspacesIn` int NOT NULL,
-  PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `Findings` text,
+  `WorkspaceId` int DEFAULT NULL,
+  `APA` text NOT NULL,
+  `IEEE` text NOT NULL,
+  `Authors` text NOT NULL,
+  PRIMARY KEY (`Id`),
+  KEY `WorkspaceId` (`WorkspaceId`),
+  CONSTRAINT `ResearchPapers_ibfk_1` FOREIGN KEY (`WorkspaceId`) REFERENCES `Workspaces` (`Id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,7 +54,7 @@ CREATE TABLE `ResearchPapers` (
 
 LOCK TABLES `ResearchPapers` WRITE;
 /*!40000 ALTER TABLE `ResearchPapers` DISABLE KEYS */;
-INSERT INTO `ResearchPapers` VALUES (1,'Research on Philippine Education',2023,'Philippines, education, policy, learning outcomes','This study explores the current state of education in the Philippines, focusing on access, quality, and policy reforms over the past decade.','A mixed-methods approach was employed, combining statistical analysis of government education data with semi-structured interviews of educators.','Results indicate a persistent gap between rural and urban education quality, with policy reforms showing gradual but uneven improvements.',1),(2,'Research on Philippine Education',2024,'Philippines, curriculum reform, teacher training, student performance','This paper examines the effects of recent curriculum reforms in the Philippines, particularly the K-12 program, on student performance and teacher preparedness.','Quantitative analysis of national exam results was paired with surveys from over 500 teachers across various regions.','Findings show significant improvement in competency-based learning, though challenges remain in resource allocation and teacher training.',1),(3,'Optimizing SQL Databases for High Performance',2023,'SQL, Databases, Optimization, Performance','This paper discusses optimization strategies for SQL databases to improve query performance and scalability.','A case study approach was used with benchmarking queries on MySQL and PostgreSQL using indexing, partitioning, and caching techniques.','The results showed significant performance gains when combining indexing with caching mechanisms, reducing query time by up to 60%.',1);
+INSERT INTO `ResearchPapers` VALUES (9,'Machine Learning in Healthcare',2018,'AI, Machine Learning','Study of ML models for healthcare. I changed the abstract for this research paper. (Added extra info).','Supervised learning with trees.','Accuracy increased by 12%.',13,'Doe, J. (2018). Machine Learning in Healthcare. Journal of AI.','J. Doe, \'Machine Learning in Healthcare,\' Journal of AI, 2018.','John Doe, Jane Smith'),(11,'Cybersecurity Threat Detection',2017,'Cybersecurity, Threat Detection','Study of anomaly detection methods.','Machine learning with SVM.','Detected 87% of attacks.',13,'Harris, K., & Clark, L. (2017). Cybersecurity threat detection using machine learning. Journal of Information Security, 6(4), 201-214.','K. Harris and L. Clark, \"Cybersecurity Threat Detection Using Machine Learning,\" J. Inf. Security, vol. 6, no. 4, pp. 201-214, 2017.\n','Kevin Harris, Linda Clark');
 /*!40000 ALTER TABLE `ResearchPapers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,7 +74,7 @@ CREATE TABLE `Users` (
   PRIMARY KEY (`Id`),
   UNIQUE KEY `UserName` (`UserName`),
   UNIQUE KEY `Email` (`Email`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,37 +83,8 @@ CREATE TABLE `Users` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES (1,'leafboo','sampleEmail@gmail.com','$2b$10$F6VbmN5mLOTG//8Fkw7rze','$2b$10$F6VbmN5mLOTG//8Fkw7rzeGrJMiyrHVlbVXeixZlBh4Aj/CNgXTNK'),(2,'testUser','testEmailll@gmail.com','$2b$10$xJskBgr7GBHH/GwVtC1sWu','$2b$10$xJskBgr7GBHH/GwVtC1sWuOZzRiPnnvrzof.uTbg4sUQ.oOymkmZy');
+INSERT INTO `Users` VALUES (14,'leafboo','dummyEmail@gmail.com','$2b$10$/v5GOOw2lN1xJZAt79See.','$2b$10$/v5GOOw2lN1xJZAt79See.bkf8Rq5JOQx4TT79ldptPyZrj/2.EEW');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `WorkspaceResearchPapers`
---
-
-DROP TABLE IF EXISTS `WorkspaceResearchPapers`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `WorkspaceResearchPapers` (
-  `Id` int NOT NULL AUTO_INCREMENT,
-  `WorkspaceId` int NOT NULL,
-  `PaperId` int NOT NULL,
-  PRIMARY KEY (`Id`),
-  KEY `WorkspaceId` (`WorkspaceId`),
-  KEY `PaperId` (`PaperId`),
-  CONSTRAINT `WorkspaceResearchPapers_ibfk_1` FOREIGN KEY (`WorkspaceId`) REFERENCES `Workspaces` (`Id`),
-  CONSTRAINT `WorkspaceResearchPapers_ibfk_2` FOREIGN KEY (`PaperId`) REFERENCES `ResearchPapers` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `WorkspaceResearchPapers`
---
-
-LOCK TABLES `WorkspaceResearchPapers` WRITE;
-/*!40000 ALTER TABLE `WorkspaceResearchPapers` DISABLE KEYS */;
-INSERT INTO `WorkspaceResearchPapers` VALUES (1,1,1),(2,1,2),(3,2,3);
-/*!40000 ALTER TABLE `WorkspaceResearchPapers` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -202,12 +98,11 @@ CREATE TABLE `Workspaces` (
   `Id` int NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) NOT NULL,
   `DateCreated` date NOT NULL,
-  `NumberOfPapers` int DEFAULT NULL,
   `UserId` int NOT NULL,
   PRIMARY KEY (`Id`),
-  KEY `UserID` (`UserId`),
-  CONSTRAINT `Workspaces_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `Users` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `UserId` (`UserId`),
+  CONSTRAINT `Workspaces_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `Users` (`Id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -216,7 +111,7 @@ CREATE TABLE `Workspaces` (
 
 LOCK TABLES `Workspaces` WRITE;
 /*!40000 ALTER TABLE `Workspaces` DISABLE KEYS */;
-INSERT INTO `Workspaces` VALUES (1,'Research on Philippine Education','2025-08-14',2,1),(2,'SQL Databases','2025-08-20',1,2);
+INSERT INTO `Workspaces` VALUES (13,'moon base','2025-10-03',14),(16,'new workspace','2025-10-14',14);
 /*!40000 ALTER TABLE `Workspaces` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -229,4 +124,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-26 10:24:59
+-- Dump completed on 2025-10-14 14:43:17
