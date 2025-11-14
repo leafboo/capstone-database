@@ -21,4 +21,6 @@ When the database tables/data have been changed, do this to make a .sql file wit
 ```
 mysqldump -u root -p --databases capstone > capstoneDatabase.sql
 ```
+<br>
 
+### For information in setting the max memory of redis, go to: <br> https://joshtronic.com/2020/09/27/how-to-set-redis-max-memory-usage/ 
